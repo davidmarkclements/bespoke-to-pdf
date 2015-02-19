@@ -1,0 +1,21 @@
+{
+  "name": "bespoke-to-pdf",
+  "version": "1.0.0",
+  "bin": {
+    "bespoke-to-pdf": "./cmd.js"
+  },
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "respository": "https://github.com/davidmarkclements/bespoke-to-pdf",
+  "author": "David Mark Clements",
+  "license": "MIT",
+  "dependencies": {
+    "line-stream": "0.0.3",
+    "nw-shot": "^2.0.1",
+    "pdfkit": "^0.7.0",
+    "through2": "^0.6.3"
+  }
+}
