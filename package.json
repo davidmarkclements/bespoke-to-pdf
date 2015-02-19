@@ -4,12 +4,11 @@
   "bin": {
     "bespoke-to-pdf": "./cmd.js"
   },
-  "description": "",
+  "description": "Generate a PDF file from your [bespoke][] presentation",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "respository": "https://github.com/davidmarkclements/bespoke-to-pdf",
   "author": "David Mark Clements",
   "license": "MIT",
   "dependencies": {
@@ -17,5 +16,14 @@
     "nw-shot": "^2.0.1",
     "pdfkit": "^0.7.0",
     "through2": "^0.6.3"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidmarkclements/bespoke-to-pdf.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davidmarkclements/bespoke-to-pdf/issues"
+  },
+  "homepage": "https://github.com/davidmarkclements/bespoke-to-pdf"
 }
