@@ -4,7 +4,19 @@ var es = require('event-stream');
 var line = require('line-stream');
 var PDF = require('pdfkit');
 
-function changeSlideMacro() { location.hash = '#N'; }
+function changeSlideMacro() { 
+  location.hash = '#N'; 
+}
+
+function noTransitionsMacro() {
+  var s  = document.createElement('style');
+  s.innerHTML = ' * { -webkit-transition:none!important } ';
+  document.body.appendChild(s);
+}
+
+function macro(fn) {
+  return ';( ' + fn + ')();'
+}
 
 module.exports = function (url, slides, opts) {
   var doc = new PDF({
@@ -24,18 +36,21 @@ module.exports = function (url, slides, opts) {
   var slideLeft = 14.5 || opts.slide.left;
   var slideTop = 22 || opts.slide.top;
   var count = 0;
-  var inject = ';( ' + changeSlideMacro + ')();';
+  var inject = macro(changeSlideMacro);
 
   inject = Array.apply(null, {length:slides+1})
     .map(Function.prototype.call, Number).slice(1)
-    .map(function(n) { return inject.replace('N', n); })
+    .map(function(n) { return inject.replace(/N/g, n); })
+
+  inject[0] = macro(noTransitionsMacro) + inject[0];
 
   screenshot({
     url : url || 'http://localhost:2000/',
     width : opts.width || 1024 * 1.5,
     height : opts.height || 682 * 1.5,
     eval: inject,
-    delay: opts.delay || 0.2,
+    delay: opts.delay || 5,
+    evalDelay: opts.slide.delay || 1,
     encoding: 'base64'
   })
   .pipe(line())
