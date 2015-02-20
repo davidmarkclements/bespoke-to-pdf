@@ -45,7 +45,7 @@ module.exports = function (url, slides, opts) {
   inject[0] = macro(noTransitionsMacro) + inject[0];
 
   screenshot({
-    url : url || 'http://localhost:2000/',
+    url : url || 'http://localhost:8080/',
     width : opts.width || 1024 * 1.5,
     height : opts.height || 682 * 1.5,
     eval: inject,

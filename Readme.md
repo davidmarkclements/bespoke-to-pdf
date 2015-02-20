@@ -11,7 +11,7 @@ Generate a PDF file from your bespoke presentation
 ### Command line
 ```sh
 $ npm -g install bespoke-to-pdf
-$ bespoke-to-pdf http://localhost:2000 30 > ./out.pdf
+$ bespoke-to-pdf http://localhost:8080 30 > ./out.pdf
 ```
 
 #### Inputs
@@ -32,7 +32,7 @@ $ npm install --save bespoke-to-pdf
 ```js
 var toPdf = require('bespoke-to-pdf');
 var fs = require('fs');
-var pdfStream = toPdf('http://localhost:2000', 30);
+var pdfStream = toPdf('http://localhost:8080', 30);
 
 pdfStream.pipe(fs.createWriteStream('./out.pdf'));
 ```
@@ -77,20 +77,20 @@ To pass top level options via the command line simply use their
 names as flags, e.g.
 
 ```sh
-$ bespoke-to-pdf --delay 1 http://localhost:2000 30 > ./out.pdf
+$ bespoke-to-pdf --delay 1 http://localhost:8080 30 > ./out.pdf
 ```
 
 Access sub level options using a hyphen:
 
 ```sh
-$ bespoke-to-pdf --slide-scale 2 http://localhost:2000 30 > ./out.pdf
+$ bespoke-to-pdf --slide-scale 2 http://localhost:8080 30 > ./out.pdf
 ```
 
 Supply command line objects or arrays as JSON, 
 make sure to quote it so spaces don't cause unintended parsing:
 
 ```sh
-$ bespoke-to-pdf --slide-fit "[100, 100]" http://localhost:2000 30 > ./out.pdf
+$ bespoke-to-pdf --slide-fit "[100, 100]" http://localhost:8080 30 > ./out.pdf
 ```
 
 ## Example
@@ -111,7 +111,7 @@ Set an environment variable `NWSHOT_SHOW` to `1` to unhide
 the NW.js browser window taking snapshots.
 
 ```sh
-$ NWSHOT_SHOW=1 bespoke-to-pdf http://localhost:2000 30 > ./out.pdf
+$ NWSHOT_SHOW=1 bespoke-to-pdf http://localhost:8080 30 > ./out.pdf
 ```
 
 ## Running on a Server
