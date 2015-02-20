@@ -1,8 +1,16 @@
 #!/usr/bin/env node
-
 var d2p = require('./index.js');
-var argv = process.argv.slice(2);
-var url = argv.filter(isNaN)[0];
-var slides = +~~(argv.filter(isFinite)[0]);
+var argv = require('minimist')(process.argv.slice(2));
+var url = argv._.filter(isNaN)[0];
+var slides = +~~(argv._.filter(isFinite)[0]);
+argv.slide = Object.keys(argv).map(function(k) {
+  var m = k.match(/slide-([a-zA-Z]+)/)
+  return m && m[1];
+}).filter(Boolean).reduce(function (o, k) {
+  o[k] = argv['slide-' + k];
+  delete  argv['slide-' + k];
+  try { o[k] = JSON.parse(o[k]); } catch (e) { }
+  return o;
+}, {});
 
-d2p(url, slides).pipe(process.stdout);
+d2p(url, slides, argv).pipe(process.stdout);

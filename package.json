@@ -12,7 +12,9 @@
   "author": "David Mark Clements",
   "license": "MIT",
   "dependencies": {
+    "event-stream": "^3.2.2",
     "line-stream": "0.0.3",
+    "minimist": "^1.1.0",
     "nw-shot": "^2.0.2",
     "pdfkit": "^0.7.0",
     "through2": "^0.6.3"

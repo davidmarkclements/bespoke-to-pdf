@@ -3,14 +3,26 @@ var screenshot = require('nw-shot');
 var es = require('event-stream');
 var line = require('line-stream');
 var PDF = require('pdfkit');
-var doc = new PDF({size:'A4',layout:'landscape'});
 
 function changeSlideMacro() { location.hash = '#N'; }
 
-module.exports = function (url, slides) {
+module.exports = function (url, slides, opts) {
+  var doc = new PDF({
+    size: opts.paperSize || opts.papersize || 'A4',
+    layout: opts.orientation || 'landscape'
+  });
+
+  opts = opts || {};
+  opts.slide = opts.slide || {};
   slides = slides || 1;
 
-  var im = {width: 1024-211};
+  var slideOpts = {width: opts.slide.width ||  1024-211};
+  if (opts.slide.height) { slideOpts.height = opts.slide.height; }
+  if (opts.slide.fit) { slideOpts = {fit: opts.slide.fit}; }
+  if (opts.slide.scale) { slideOpts.scale = opts.slide.scale; }
+  
+  var slideLeft = 14.5 || opts.slide.left;
+  var slideTop = 22 || opts.slide.top;
   var count = 0;
   var inject = ';( ' + changeSlideMacro + ')();';
 
@@ -20,16 +32,16 @@ module.exports = function (url, slides) {
 
   screenshot({
     url : url || 'http://localhost:2000/',
-    width : 1024 * 1.5,
-    height : 682 * 1.5,
+    width : opts.width || 1024 * 1.5,
+    height : opts.height || 682 * 1.5,
     eval: inject,
-    delay: 0.2,
+    delay: opts.delay || 0.2,
     encoding: 'base64'
   })
   .pipe(line())
   .pipe(es.through(function(buffer) {
     count += 1;
-    doc.image(buffer, 14.5, 22, im);
+    doc.image(buffer, slideLeft, slideTop, slideOpts);
     if (count < slides) doc.addPage()
   }, function end() {
     this.emit('end');
@@ -37,9 +49,4 @@ module.exports = function (url, slides) {
   }));
 
   return doc;
-
 }
-
-
-
-
