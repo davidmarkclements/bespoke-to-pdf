@@ -117,8 +117,7 @@ $ NWSHOT_SHOW=1 bespoke-to-pdf http://localhost:2000 30 > ./out.pdf
 
 NW.js requires an X server to run, currently there is no
 headless offering. Until that happens see [this comment in
-NW.js issue XX](https://github.com/nwjs/nw.js/issues/769#issuecomment-40787394)
-for a starting place to create a server environment that
+NW.js issue 769](https://github.com/nwjs/nw.js/issues/769#issuecomment-40787394) for a starting place to create a server environment that
 will run NW.js without requiring a physical display.
 
 ## How

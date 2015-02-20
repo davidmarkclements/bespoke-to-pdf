@@ -4,7 +4,7 @@
   "bin": {
     "bespoke-to-pdf": "./cmd.js"
   },
-  "description": "Generate a PDF file from your [bespoke][] presentation",
+  "description": "Generate a PDF file from your bespoke presentation",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
