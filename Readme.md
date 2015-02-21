@@ -77,7 +77,7 @@ To pass top level options via the command line simply use their
 names as flags, e.g.
 
 ```sh
-$ bespoke-to-pdf --delay 1 http://localhost:8080 30 > ./out.pdf
+$ bespoke-to-pdf --delay 1000 http://localhost:8080 30 > ./out.pdf
 ```
 
 Access sub level options using a hyphen:
@@ -96,7 +96,7 @@ $ bespoke-to-pdf --slide-fit "[100, 100]" http://localhost:8080 30 > ./out.pdf
 ## Example
 
 ```sh
-$ bespoke-to-pdf --delay .5 http://davidmarkclements.github.io/10-tips/ 71 > 10-tips.pdf
+$ bespoke-to-pdf http://davidmarkclements.github.io/10-tips/ 71 > 10-tips.pdf
 ```
 
 This will generate a PDF from a remote bespoke presentation, 
