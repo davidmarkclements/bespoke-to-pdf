@@ -5,6 +5,7 @@ Generate a PDF file from your bespoke presentation
 ## Requirements
 
 * Presentation must be using [bespoke-hash][]
+  * Unless using a custom app 
 
 ## Usage
 
@@ -54,11 +55,13 @@ Listed values are defaults
 
 ```js
 {
+
   width: 1024 * 1.5,  //width of browser instance
   height: 682 * 1.5,  //height of browser instance
   delay: 5000, // (milliseconds) delay from page load to first capture
   orientation: 'landscape', // PDF paper layout portrait or landscape 
   paperSize: 'A4',  // PDF paper size, accepts common US and GB sizes or an array tuple consisting of [width, height]
+  app: undefined, //path to nw.js app, which is passed to nw-shot dependency
   slide: {
     left: 14.5, //left position of the slide in the PDF page
     top: 22, // top position of the slide in the PDF page
