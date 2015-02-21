@@ -1,6 +1,6 @@
 {
   "name": "bespoke-to-pdf",
-  "version": "3.0.2",
+  "version": "4.0.0",
   "bin": {
     "bespoke-to-pdf": "./cmd.js"
   },
