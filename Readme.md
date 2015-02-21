@@ -56,7 +56,7 @@ Listed values are defaults
 {
   width: 1024 * 1.5,  //width of browser instance
   height: 682 * 1.5,  //height of browser instance
-  delay: 0.2, // (seconds) delay from page load to first capture
+  delay: 5000, // (milliseconds) delay from page load to first capture
   orientation: 'landscape', // PDF paper layout portrait or landscape 
   paperSize: 'A4',  // PDF paper size, accepts common US and GB sizes or an array tuple consisting of [width, height]
   slide: {
@@ -68,7 +68,7 @@ Listed values are defaults
                     // fit overrides width and height, causes image
                     // to fit into supplied bounds
     scale: 1, // scale image by amount
-    delay: 1 // delay between slides
+    delay: 1000 // delay between slides
   }
 }
 ```

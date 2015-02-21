@@ -9,7 +9,7 @@ function changeSlideMacro() {
 }
 
 function noTransitionsMacro() {
-  var s  = document.createElement('style');
+  var s = document.createElement('style');
   s.innerHTML = ' * { -webkit-transition:none!important } ';
   document.body.appendChild(s);
 }
@@ -19,10 +19,13 @@ function macro(fn) {
 }
 
 module.exports = function (url, slides, opts) {
+  var addPage = PDF.prototype.addPage;
+  PDF.prototype.addPage = function(){}
   var doc = new PDF({
     size: opts.paperSize || opts.papersize || 'A4',
     layout: opts.orientation || 'landscape'
   });
+  PDF.prototype.addPage = addPage;
 
   opts = opts || {};
   opts.slide = opts.slide || {};
@@ -35,7 +38,6 @@ module.exports = function (url, slides, opts) {
   
   var slideLeft = 14.5 || opts.slide.left;
   var slideTop = 22 || opts.slide.top;
-  var count = 0;
   var inject = macro(changeSlideMacro);
 
   inject = Array.apply(null, {length:slides+1})
@@ -45,19 +47,19 @@ module.exports = function (url, slides, opts) {
   inject[0] = macro(noTransitionsMacro) + inject[0];
 
   screenshot({
-    url : url || 'http://localhost:8080/',
-    width : opts.width || 1024 * 1.5,
-    height : opts.height || 682 * 1.5,
+    app: opts.app,
+    url: url || 'http://localhost:8080/',
+    width: opts.width || 1024 * 1.5,
+    height: opts.height || 682 * 1.5,
     eval: inject,
-    delay: opts.delay || 5,
-    evalDelay: opts.slide.delay || 1,
+    delay: opts.delay || 5000,
+    evalDelay: opts.slide.delay || 1000,
     encoding: 'base64'
   })
   .pipe(line())
   .pipe(es.through(function(buffer) {
-    count += 1;
+    doc.addPage()
     doc.image(buffer, slideLeft, slideTop, slideOpts);
-    if (count < slides) doc.addPage()
   }, function end() {
     this.emit('end');
     doc.end()
